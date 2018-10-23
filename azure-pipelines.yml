@@ -30,11 +30,8 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     
- - task: AzureResourceGroupDeployment@2
-  displayName: 'Azure Deployment:Start action on DTLDemo'
+- task: AzureResourceGroupDeployment@2
   inputs:
     azureSubscription: MsdnSubscription
-
     action: Start
-
     resourceGroupName: DTLDemo
