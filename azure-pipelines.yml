@@ -18,6 +18,15 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
+
+- task: AzureResourceGroupDeployment@2
+  displayName: 'Azure Deployment:Start action on abhishe-RG'
+  inputs:
+    azureSubscription: AutoSPN-1
+    action: Start
+    resourceGroupName: 'abhishe-RG'
+
+
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
@@ -29,10 +38,4 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-    
-- task: AzureResourceGroupDeployment@2
-  displayName: 'Azure Deployment:Start action on abhishe-RG'
-  inputs:
-    azureSubscription: AutoSPN-1
-    action: Start
-    resourceGroupName: 'abhishe-RG'
+ 
