@@ -1,0 +1,15 @@
+jobs:
+- job: InitialJob
+  pool: Default
+  steps:
+  - script: echo hello from initial job
+- job: SubsequentA
+  dependsOn: InitialJob
+  pool: Default
+  steps:
+  - script: echo hello from subsequent A
+- job: SubsequentB
+  dependsOn: InitialJob
+  pool: Default
+  steps:
+  - script: echo hello from subsequent B

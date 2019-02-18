@@ -1,0 +1,12 @@
+jobs:
+- job: AgentPhase
+  pool: Default    
+  steps:
+  - script: echo hello from Windows
+- job: ServerPhase
+  pool: server
+  steps:
+  - task: Delay@1
+    inputs:
+      delayForMinutes: 1
+  

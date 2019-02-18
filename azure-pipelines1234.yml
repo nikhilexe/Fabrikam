@@ -1,0 +1,45 @@
+# ASP.NET
+# Build and test ASP.NET web applications.
+# Add steps that publish symbols, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/vsts/pipelines/apps/aspnet/build-aspnet-4
+
+queue: Default
+
+variables:
+  #solution: '**/*.sln'
+  #buildPlatform: 'Any CPU'
+  #buildConfiguration: 'Release'
+- group: VG4
+
+steps:
+- task: NuGetToolInstaller@0
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '**/*.sln'
+
+- task: AzureResourceGroupDeployment@2
+  displayName: 'Azure Deployment:Start1 action on aj-RG'
+  inputs:
+    azureSubscription: RMDev
+    action: Start
+    resourceGroupName: $(VG4)
+
+- task: DownloadSecureFile@1
+  displayName: 'Download secure file'
+  inputs:
+    secureFile: '67cb503f-6f0e-4bf8-89e5-c0fb80184678'
+
+- task: DownloadSecureFile@1
+  displayName: 'Download secure file'
+  inputs:
+    secureFile: 'bffc6fa5-0691-4e6b-a95b-846721fc5533'
+
+- task: AzureResourceGroupDeployment@2
+  displayName: 'Azure Deployment:Start action on abhishe-RG'
+  inputs:
+    azureSubscription: NewRMDev
+    action: Start
+    resourceGroupName: 'abhishe-RG'
+
+
