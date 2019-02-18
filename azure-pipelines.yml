@@ -31,7 +31,8 @@ steps:
     configuration: '$(buildConfiguration)'
     
 - task: AzureResourceGroupDeployment@2
+  displayName: 'Azure Deployment:Start action on abhishe-RG'
   inputs:
-    azureSubscription: MsdnSubscription
+    azureSubscription: AutoSPN-1
     action: Start
-    resourceGroupName: DTLDemo
+    resourceGroupName: 'abhishe-RG'
