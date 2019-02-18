@@ -22,7 +22,7 @@ steps:
 - task: AzureResourceGroupDeployment@2
   displayName: 'Azure Deployment:Start action on abhishe-RG'
   inputs:
-    azureSubscription: RMDev-1
+    azureSubscription: AuthTest
     action: Start
     resourceGroupName: 'abhishe-RG'
 
