@@ -8,12 +8,12 @@ stages:
 
 - stage: PPE
   jobs:
-  - job: Deploy PPE
+  - job: Test
     pool: 'Default'
     steps:
     - script: echo 'Default'
     - task: NuGetToolInstaller@0
-  - deployment: j2
+  - deployment: DeployPPE
     environment: Nikhil-Env
     pool: 'Default'
     strategy:
@@ -25,12 +25,12 @@ stages:
 
 - stage: Prod
   jobs:
-  - job: Deploy Prod
+  - job: DeployProd
     pool: 'Default'
     steps:
     - task: AzureResourceGroupDeployment@2
-    displayName: 'Azure Deployment:Start action on Project1-app'
-    inputs:
-      azureSubscription: RMDev
-      action: Start
-      resourceGroupName: 'Project1-app'
+      displayName: 'Azure Deployment:Start action on Project1-app'
+      inputs:
+        azureSubscription: RMDev
+        action: Start
+        resourceGroupName: 'aafn1'
