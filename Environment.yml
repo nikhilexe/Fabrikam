@@ -1,0 +1,17 @@
+# ASP.NET
+# Build and test ASP.NET web applications.
+# Add steps that publish symbols, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/vsts/pipelines/apps/aspnet/build-aspnet-4
+
+
+jobs:
+- deployment: job1
+  environment: ch-k
+  pool: default
+  strategy:
+   runOnce:
+    deploy:
+     steps:
+     - script: echo Hello, world!
+       displayName: 'Run a one-line script'
+ 
