@@ -1,0 +1,36 @@
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    pool: 'Default'
+    steps:
+    - script: echo 'Build'
+
+- stage: PPE
+  jobs:
+  - job: Deploy PPE
+    pool: 'Default'
+    steps:
+    - script: echo 'Default'
+    - task: NuGetToolInstaller@0
+  - deployment: j2
+    environment: Nikhil-Env
+    pool: 'Default'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - script: echo Hello, world!
+            displayName: 'Run a one-line script'
+
+- stage: Prod
+  jobs:
+  - job: Deploy Prod
+    pool: 'Default'
+    steps:
+    - task: AzureResourceGroupDeployment@2
+    displayName: 'Azure Deployment:Start action on Project1-app'
+    inputs:
+      azureSubscription: RMDev
+      action: Start
+      resourceGroupName: 'Project1-app'
