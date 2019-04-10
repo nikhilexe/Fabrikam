@@ -1,17 +1,51 @@
-# ASP.NET
-# Build and test ASP.NET web applications.
-# Add steps that publish symbols, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/vsts/pipelines/apps/aspnet/build-aspnet-4
+stages:
+- stage: Stage1
+  jobs:
+  - job: Build
+    pool: 'Default'
+    steps:
+    - script: echo 'Build'
 
+- stage: Stage2
+  variables:
+  - group: vg1
+  jobs:
+  - job: j1
+    pool: 'Default'
+    steps:
+    - script: echo 'Default'
+    - task: NuGetToolInstaller@0
+    - task: NuGetCommand@2
+      inputs:
+        restoreSolution: '$(solution)'    
+    - task: AzureResourceGroupDeployment@2
+      displayName: 'Azure Deployment:Start action on ankhokha-update'
+      inputs:
+        azureSubscription: 'random'
+        action: Start
+        resourceGroupName: 'ankhokha-update'
+    - task: DownloadSecureFile@1
+      displayName: 'Download secure file'
+      inputs:
+        secureFile: '34321357-e410-46ad-9b20-f531462ea484'
+  - deployment: j2
+    environment: randomenv
+    pool: 'Pool1'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - script: echo Hello, world!
+            displayName: 'Run a one-line script'
 
-jobs:
-- deployment: job1
-  environment: ch-k
-  pool: default
-  strategy:
-   runOnce:
-    deploy:
-     steps:
-     - script: echo Hello, world!
-       displayName: 'Run a one-line script'
- 
+  - job: j3
+    pool: 'Pool2'
+    steps:
+    - script: echo 'Pool2'
+
+- stage: Stage3
+  jobs:
+  - job: Build
+    pool: 'Pool2'
+    steps:
+    - script: echo 'Pool2'
