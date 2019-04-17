@@ -29,8 +29,8 @@ stages:
     pool: 'Default'
     steps:
     - task: AzureResourceGroupDeployment@2
-      displayName: 'Azure Deployment:Start action on Project1-app'
+      displayName: 'Azure Deployment:Start action on abhishe-RG'
       inputs:
         azureSubscription: RMDev
         action: Start
-        resourceGroupName: 'aafn1'
+        resourceGroupName: 'abhishe-RG'
