@@ -2,20 +2,20 @@ stages:
 - stage: Build
   jobs:
   - job: Build
-    pool: 'Hosted'
+    pool: 'Hosted Windows 2019 with VS2019'
     steps:
     - script: echo 'Build'
 
 - stage: PPE
   jobs:
   - job: Test
-    pool: 'Hosted'
+    pool: 'Hosted Windows 2019 with VS2019'
     steps:
     - script: echo 'Hosted'
     - task: NuGetToolInstaller@0
   - deployment: DeployPPE
     environment: Nikhil-Env
-    pool: 'Hosted'
+    pool: 'Hosted Windows 2019 with VS2019'
     strategy:
       runOnce:
         deploy:
@@ -26,7 +26,7 @@ stages:
 - stage: Prod
   jobs:
   - job: DeployProd
-    pool: 'Hosted'
+    pool: 'Hosted Windows 2019 with VS2019'
     steps:
     - task: AzureResourceGroupDeployment@2
       displayName: 'Azure Deployment:Start action on abhishe-RG'
