@@ -31,6 +31,6 @@ stages:
     - task: AzureResourceGroupDeployment@2
       displayName: 'Azure Deployment:Start action on abhishe-RG'
       inputs:
-        azureSubscription: RMDev
+        azureSubscription: NikhilRMDev
         action: Start
         resourceGroupName: 'abhishe-RG'
