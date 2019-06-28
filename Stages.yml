@@ -14,7 +14,7 @@ stages:
     - script: echo 'Hosted'
     - task: NuGetToolInstaller@0
   - deployment: DeployPPE
-    environment: Nikhil-Env
+    environment: Nikhil-Env08
     pool: 'Hosted'
     strategy:
       runOnce:
