@@ -1,0 +1,23 @@
+variables:
+  json: "{'debugJob': {'configuration': 'debug'}, 'releaseJob': {'configuration': 'release'}}" 
+stages:
+- stage: Build
+  jobs:
+  - job: BuildQA
+    pool: 'Default'
+    steps:
+    - script: echo "##vso[task.setvariable variable=myOutputVar;isOutput=true] $(json)"
+      name: setvarStep
+    - script: echo $(setvarStep.myOutputVar)
+      name: echovar
+  - job: DeployQA
+    dependsOn: BuildQA
+    pool: 'Default'
+    strategy:
+      matrix: $[ dependencies.BuildQA.outputs['setvarStep.myOutputVar'] ]
+    variables:
+      myVarFromJobsA1: $[ dependencies.BuildQA.outputs['setvarStep.myOutputVar'] ]
+    steps:
+    - script: echo $(myVarFromJobsA1)
+      name: echovar
+
